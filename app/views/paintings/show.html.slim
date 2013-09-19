@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @painting.name
+
+  = image_tag @painting.image_url(:cropped).to_s
+  / = image_tag @painting.image_url(:thumb).to_s
+
+= link_to 'Edit', edit_painting_path(@painting)
+'|
+= link_to 'Back', paintings_path

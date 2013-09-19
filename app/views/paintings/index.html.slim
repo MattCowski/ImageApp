@@ -1,0 +1,30 @@
+h1 Listing paintings
+
+table
+  tr
+    th Name
+    th
+    th
+    th
+
+  - @paintings.each do |painting|
+    tr
+      td = painting.name
+      td = link_to 'Show', painting
+      td = link_to 'Edit', edit_painting_path(painting)
+      td = link_to 'Destroy', painting, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Painting', new_painting_path
+
+/ Below code is from failed jquery multi uploader
+/ = form_for Painting.new do |f| 
+  = f.label :image, "Upload paintings:" 
+  = f.file_field :image, multiple: true, name: "painting[image]" 
+
+/ script#template-upload type="text/x-tmpl"
+/ .upload
+  {%=o.name%}
+  .progress
+    .bar style="width: 0%"

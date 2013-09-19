@@ -1,0 +1,24 @@
+= form_for @painting, :html => {:multipart => true} do |f|
+  / = f.error_messages
+  / = f.hidden_field :gallery_id
+
+  - if @painting.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@painting.errors.count, "error")} prohibited this painting from being saved:"
+      ul
+        - @painting.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+    = f.file_field :image
+    = f.label :remote_image_url, "or image URL"
+    = f.text_field :remote_image_url
+    = image_tag(@painting.image_url(:cropped)) if @painting.image?
+    / = image_tag(@painting.image_url(:thumb)) if @painting.image?
+    = f.hidden_field :image_cache
+    label
+      = f.check_box :remove_image
+    
+  .actions = f.submit 'Save'
