@@ -9,6 +9,7 @@ table
 
   - @paintings.each do |painting|
     tr
+      td = image_tag(painting.image_url :mini )
       td = painting.name
       td = link_to 'Show', painting
       td = link_to 'Edit', edit_painting_path(painting)

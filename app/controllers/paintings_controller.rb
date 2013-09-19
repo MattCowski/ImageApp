@@ -28,7 +28,7 @@ class PaintingsController < ApplicationController
 
     respond_to do |format|
       if @painting.save
-        if params[:painting][:image].present?
+        if params[:painting].present? || params[:painting][:remote_image_url].present? 
           format.html { render :crop }
         else
           format.html { redirect_to @painting, notice: 'Painting was successfully created.' }
@@ -46,7 +46,7 @@ class PaintingsController < ApplicationController
   def update
     respond_to do |format|
       if @painting.update(painting_params)
-        if params[:painting][:image].present?
+        if params[:painting][:image].present? || params[:painting][:remote_image_url].present? 
           format.html { render :crop }
         else
           format.html { redirect_to @painting, notice: 'Painting was successfully updated.' }
