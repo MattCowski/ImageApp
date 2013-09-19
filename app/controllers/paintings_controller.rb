@@ -28,7 +28,7 @@ class PaintingsController < ApplicationController
 
     respond_to do |format|
       if @painting.save
-        if params[:painting].present? || params[:painting][:remote_image_url].present? 
+        if params[:painting][:image].present? || params[:painting][:remote_image_url].present? || params[:painting][:stored_image].present?
           format.html { render :crop }
         else
           format.html { redirect_to @painting, notice: 'Painting was successfully created.' }
@@ -46,7 +46,7 @@ class PaintingsController < ApplicationController
   def update
     respond_to do |format|
       if @painting.update(painting_params)
-        if params[:painting][:image].present? || params[:painting][:remote_image_url].present? 
+        if params[:painting][:image].present? || params[:painting][:remote_image_url].present? || params[:painting][:stored_image].present?
           format.html { render :crop }
         else
           format.html { redirect_to @painting, notice: 'Painting was successfully updated.' }
@@ -77,6 +77,6 @@ class PaintingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def painting_params
-      params.require(:painting).permit(:name, :image, :remote_image_url, :crop_x, :crop_y, :crop_w, :crop_h)
+      params.require(:painting).permit(:name, :image, :remote_image_url, :stored_image, :crop_x, :crop_y, :crop_w, :crop_h)
     end
 end

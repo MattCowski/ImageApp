@@ -3,7 +3,7 @@ class Painting < ActiveRecord::Base
   after_update :crop_image
 	# before_create :default_name
   # attr_accessible :gallery_id, :name, :image
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :stored_image
   # belongs_to :gallery
   mount_uploader :image, ImageUploader
 

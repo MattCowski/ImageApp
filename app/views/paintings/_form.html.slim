@@ -14,10 +14,11 @@
     = f.text_field :name
     = f.label :remote_image_url, "Image URL:"
     / = f.text_field :remote_image_url
-    = f.text_field :remote_image_url,:value=>(@painting.new_record? ? params[:remote_image_url] : @painting.image_url )
+    = f.text_field :remote_image_url
+    = f.text_field :stored_image,:value=>(@painting.new_record? ? params[:remote_image_url] || params[:image] : "none")
     = f.label :image, "Or upload an image:"
     / = f.file_field :image
-    = f.file_field :image,:value=>(@painting.new_record? ? params[:image] : @painting.image.cropped.url )
+    = f.file_field :image
     = image_tag(@painting.image_url(:large)) if @painting.image?
     /= image_tag(@painting.image_url(:cropped)) if @painting.image?
     /= image_tag(@painting.image_url) if @painting.image?
