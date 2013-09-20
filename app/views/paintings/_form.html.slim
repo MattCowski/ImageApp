@@ -13,38 +13,17 @@
     = f.label :name
     = f.text_field :name
     = f.label :remote_image_url, "Image URL:"
-    / = f.text_field :remote_image_url
     = f.text_field :remote_image_url
-    = f.text_field :stored_image,:value=>(@painting.new_record? ? params[:remote_image_url] || params[:image] : "none")
+    = f.hidden_field :stored_image,:value=>("a" unless @painting.new_record?)
     = f.label :image, "Or upload an image:"
-    / = f.file_field :image
     = f.file_field :image
-    = image_tag(@painting.image_url(:large)) if @painting.image?
-    /= image_tag(@painting.image_url(:cropped)) if @painting.image?
-    /= image_tag(@painting.image_url) if @painting.image?
-    = @painting.image_cache.inspect if @painting.image?
-    = @painting.image_url.inspect if @painting.image?
-    / = image_tag(@painting.image_url(:thumb)) if @painting.image?
     = f.hidden_field :image_cache
     label
       = f.check_box :remove_image
     
   .actions = f.submit 'Save'
 
+    
+/ div
+  == render "crop"
 
-/ <%= form_for @painting, :html => {:multipart => true} do |f| %>
-/   <%= f.error_messages %>
-/   <%= f.hidden_field :gallery_id %>
-/   <p>
-/     = f.label :name %><br />
-/     = f.text_field :name %>
-/   </p>
-/   <p>
-/     = f.file_field :image %>
-/   </p>
-/   <p>
-/     = f.label :remote_image_url, "or image URL" %><br />
-/     = f.text_field :remote_image_url %>
-/   </p>
-/   <p><%= f.submit %></p>
-/ <% end %>

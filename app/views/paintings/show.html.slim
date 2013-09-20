@@ -4,6 +4,7 @@ p
   strong Name:
   = @painting.name
 
+
   = image_tag @painting.image_url(:cropped).to_s
   / = image_tag @painting.image_url(:thumb).to_s
 
